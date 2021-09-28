@@ -4,8 +4,8 @@ import React from 'react';//отвечает за работу с react, jsx
 import ReactDOM from 'react-dom';//позволяет работать с dom структурой на странице.
 //вставляет библиотеку react и наш продукт на страницу
 import './index.css';
-import App from './App';
-import {Header} from './App';
+import App from './components/app/app';
+
 
 ReactDOM.render(
   <React.StrictMode>
