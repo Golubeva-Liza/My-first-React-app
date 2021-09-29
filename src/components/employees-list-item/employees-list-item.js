@@ -1,9 +1,15 @@
 import './employees-list-item.css';
-const EmployeesListItem = () => {
+const EmployeesListItem = ({name, salary, increase}) => {
+    //можно делать не условие, где мы внутрь возвращаемого элемента прописываем название класса, а сделать так:
+    
+    let classIncrease = '';
+    if (increase){
+        classIncrease = "increase";
+    }
     return (
-        <li className="list-group-item d-flex justify-content-between">
-            <span className="list-group-item-label">Liza Golubeva</span>
-            <input type="text" className="list-group-item-input" defaultValue="1000$"/>
+        <li className={`list-group-item d-flex justify-content-between ${classIncrease}`}>
+            <span className="list-group-item-label">{name}</span>
+            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className="d-flex justify-content-center align-items-center">
                 <button type="button" className="btn-cookie btn-sm">
                     <i className="fas fa-cookie"></i>
@@ -14,7 +20,7 @@ const EmployeesListItem = () => {
                 <i className="fas fa-star"></i>
             </div>
         </li>
-    )
+    )    
 }
 //defaultValue - в реакте есть этот доп атрибут. value будет изменяться реактом
 

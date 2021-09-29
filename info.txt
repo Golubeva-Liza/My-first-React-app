@@ -4,3 +4,27 @@ eslint уже не надо настраивать, он встроен в CRA. 
 babel занимается не только тем, что делает код понятным для многих браузеров, в которых некоторые функции ещё не доступны,
 но и переводит jsx формат в обычный jshint
 https://babeljs.io/docs/en/babel-plugin-transform-react-jsx
+
+
+________________________________
+Свойства компонентов - или пропсы
+
+пропс мы используем в компонентах, но никогда не записываем что-то внутри него. компонент не должен менять свои пропсы. чтобы изменить элемент в компоненте, надо полностью перерендерить компонент
+Называть свойства стоит так, чтобы они лучше всего подходили к содержимому компонента
+
+//function WhoAmI(props){//props все равно будет сформирован, если даже его не прописать
+function WhoAmI({name, surname, link}){//чаще пишут так - деструктуризация
+    return (
+        <div>
+            <h1>My name is {name()}, surname - {surname}</h1>
+            <a href={link}>My profile</a>
+        </div>
+    )
+}
+
+В значение свойства можно писать строку, функцию, объект
+<WhoAmI name={{firstName: 'Liza'}} surname="Golubeva" link="https://yandex.ru/"/>
+<WhoAmI name={() => {return 'Seva'}} surname="NeGolubeva" link="https://yandex.ru/"/>
+и вызывать 
+<h1>My name is {name.firstName}, surname - {surname}</h1>
+<h1>My name is {name()}, surname - {surname}</h1>
