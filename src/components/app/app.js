@@ -18,14 +18,13 @@ class WhoAmI extends Component{
         //создаем состояние
         this.state = {
             years: 27, 
-            text: 'что-то'//если изменения этого не прописаны в setState, а там возвращается новый объект, то с этим свойством ничего не будет, тк так устроен setState
-            //setState меняет только то, что в ней прописано, остальное оставляет неизменным
+            position: '',
+            text: 'нажми'
         }
+        //this.nextYear = this.nextYear.bind(this); //- слева свойства у экземпляра, справа обращаемся к методу и привязываем к конкретному экземпляру класса, чтобы ты не терял this
     }
 
     nextYear = () => {
-        console.log('++');
-        // this.state.years++; - напрямую состояния менять нельзя
         // this.setState({
         //     // years: ++this.state.years - тут инкремент лучше не использовать, тк все равно меняется напрямую состояние
         //     years: this.state.years + 1
@@ -40,20 +39,32 @@ class WhoAmI extends Component{
         }));// синтаксис оборота объекта в круглые скобки = вернуть объект в результате выполнения
         
     }
-    //здесь только стрелочная функция (в реакт)
+
+    commitInputChanges = (e) => {
+        this.setState({
+            position: e.target.value
+        })
+        //после срабатывания setState всегда срабатывает render
+    }
     
     render(){
         const {name, surname, link} = this.props;
+        const {position, years} = this.state;
         return (
             <div>
                 <button onClick={this.nextYear}>{this.state.text}</button>
-                <h1>My name is {name}, surname - {surname}, age - {this.state.years} </h1>
+                <h1>My name is {name}, surname - {surname}, age - {years}, position - {position} </h1>
                 <a href={link}>My profile</a>
+                <form>
+                    <span>Введите должность</span>
+                    <input type="text" onChange={this.commitInputChanges} />
+                </form>
             </div>
         )
     }
     //класс создает экземпляры
     //передаем кнопке метод - не вызываем, а указываем
+
 }
 
 
