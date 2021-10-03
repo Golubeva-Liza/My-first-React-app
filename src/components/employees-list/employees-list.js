@@ -1,21 +1,14 @@
 import EmployeesListItem from "../employees-list-item/employees-list-item"
 import './employees-list.css';
 
-const EmployersList = ({data}) => {
+const EmployersList = ({data, onDelete}) => {
     // перебирается массив data и возвращается новый
     const elements = data.map(item => {
-        // можно сделать так
-        // const {id, ...itemProps} = item;
-        // return (
-        //     <EmployeesListItem key={id} {...itemProps}/>
-        //     // <EmployeesListItem {...item} /> - то же самое
-        // )
-        //если с бэка не пришел id, то можно подставить в key так
-        // const elements = data.map((item, id) => {
-        //такое допускается, если они не будут меняться местами!
+        const {id, ...itemProps} = item;
+
         return (
-            <EmployeesListItem key={item.id} name={item.name} salary={item.salary} increase={item.increase}/>
-            // <EmployeesListItem {...item} /> - то же самое
+            // <EmployeesListItem key={item.id} name={item.name} salary={item.salary} increase={item.increase}/>
+            <EmployeesListItem key={id} {...itemProps} onDelete={() => onDelete(id)}/>
         )
     });
     // теперь это массив, состоящий из элементов EmployeesListItem
