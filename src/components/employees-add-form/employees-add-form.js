@@ -22,6 +22,14 @@ class EmployeesAddForm extends Component{
 
     onSubmit = (e) => {
         e.preventDefault();
+        if (!this.state.name || !this.state.salary){
+            alert('Заполните все данные о сотруднике');
+            return;
+        }
+        if (this.state.name.length < 3){
+            alert('Имя сотрудника должно содержать 3 и более символов');
+            return;
+        }
         this.props.addEmployee(this.state.name, this.state.salary);
         this.setState({
             name: '',
