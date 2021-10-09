@@ -1,5 +1,5 @@
 import './app-info.css';
-//компоненты называются с большой буквы
+
 const AppInfo = ({employeesNum, increaseNum}) => {
     return (
         <div className="app-info">

@@ -25,5 +25,3 @@ const EmployersList = ({data, onDelete, onToggleProp}) => {
     )
 }
 export default EmployersList;
-
-//число тоже в фигурных скобках 0_o

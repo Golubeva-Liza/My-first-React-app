@@ -22,21 +22,14 @@ class App extends Component{
                 {name: "Lera S.", salary:4000, increase: false, rise: false, id: 3},
                 {name: "Max K.", salary:1500, increase: true, rise: false, id: 4},
             ],
-            term: ''
+            term: '',
+            filterName: 'all'
         }//иммутабелен, нельзя напрямую его менять
     }
 
     deleteItem = (id) => {
         this.setState(({data}) =>{
             //не можем напрямую удалить из data элемент, например, через data.splice(index, 1)
-            
-            // 1 способ
-            // const index = data.findIndex(elem => elem.id === id);
-            // const before = data.slice(0, index);//копируем массив начиная с 0 до index
-            // const after = data.slice(index + 1);// копируем начиная с index+1 до конца массива
-            // const newData = [...before, ...after];
-
-            //2 способ
             return{
                 // data: newData
                 data: data.filter(item => item.id !== id)//он создает новый массив
@@ -60,7 +53,7 @@ class App extends Component{
         });
     }
 
-    //тк методы onToggleRise и onToggleIncrease очень похожи, то можно сделать их в одну функцию. prop - значение из дата атрибута, равное свойству в state data
+    //методы onToggleRise и onToggleIncrease
     onToggleProp = (id, prop) => {
         this.setState(({data}) => ({
             data: data.map(item => {
@@ -72,35 +65,12 @@ class App extends Component{
         }))
     }
 
-    // onToggleRise = (id) => {
-            // this.setState(({data}) => {
-            //     const index = data.findIndex(elem => elem.id === id);
-            //     const old = data[index];
-            //     const newItem = {...old, increase: !old.increase};//новый объект
-            //     //добавляем новые свойства. если они будут совпадать с тем, что есть в old, то написанное будет заменять старое
-            //     const newArr = [...data.slice(0, index), newItem, ...data.slice(index+1)];
-
-            //     return {
-            //         data: newArr
-            //     }
-            // })
-    //     this.setState(({data}) => ({
-    //         data: data.map(item => {
-    //             if(item.id === id){
-    //                 return {...item, rise: !item.rise}
-    //             }
-    //             return item;
-    //         })
-    //     }))
-    // }
-
-
     //метод для поиска сотрудника
     //1 арг - строчка по которой будем искать, 2 арг - массив данных, по которому бдет фильтровать
     searchEmp = (items, term) => {
         //если пользователь что-то ввел, а потом стёр
         if(term.length === 0){
-            return items;//возвращаем все данные
+            return items;
         }
 
         return items.filter(item => {
@@ -108,23 +78,55 @@ class App extends Component{
             return item.name.indexOf(term) > -1
         })
     }
-
     //обновляет term в this.state
     onUpdateSearch = (term) => {
         this.setState({term}); //{term: term}
     }
 
+    onUpdateFilter = (filterName) => {
+        this.setState({filterName});
+    }
+
+    filterEmp = (items, filterName) => {
+        // if (filterName == 'all'){
+        //     return items;
+        // }
+        // if (filterName == 'rise'){
+        //     return items.filter(item => {
+        //         return item.rise == true
+        //     });
+        // }
+        // if (filterName == 'hight-salary'){
+        //     return items.filter(item => {
+        //         return item.salary > 1000
+        //     });
+        // }
+
+        //можно с помощью switch case
+        switch (filterName){
+            case 'rise': 
+                return items.filter(item => item.rise);
+            case 'hight-salary': 
+                return items.filter(item => item.salary > 1000);
+            case 'all': 
+                return items;
+        }
+    }
+
     render(){
-        const {data, term} = this.state;
+        const {data, term, filterName} = this.state;
         const icreased = data.filter(item => item.increase).length;
-        const visibleData = this.searchEmp(data, term);//мы не меняем массив данных при поиске, а просто отображаем то, что нужно
+
+        //как скомбинировать и поиск и фильтрацию:
+        const visibleData = this.filterEmp(this.searchEmp(data, term), filterName);
+
         return (
             <div className="app">
                 <AppInfo employeesNum={data.length} increaseNum={icreased}/>
     
                 <div className="search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                    <AppFilter/>
+                    <AppFilter filter={filterName} onUpdateFilter={this.onUpdateFilter}/>
                 </div>
                 <EmployeesList 
                     data={visibleData} 
@@ -135,7 +137,6 @@ class App extends Component{
         );
     }
 }
-{/* <EmployeesList data={data}/> - передаю в качестве свойства массив с объектами */}
 
 export default App;
 
