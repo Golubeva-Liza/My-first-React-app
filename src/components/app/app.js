@@ -88,21 +88,6 @@ class App extends Component{
     }
 
     filterEmp = (items, filterName) => {
-        // if (filterName == 'all'){
-        //     return items;
-        // }
-        // if (filterName == 'rise'){
-        //     return items.filter(item => {
-        //         return item.rise == true
-        //     });
-        // }
-        // if (filterName == 'hight-salary'){
-        //     return items.filter(item => {
-        //         return item.salary > 1000
-        //     });
-        // }
-
-        //можно с помощью switch case
         switch (filterName){
             case 'rise': 
                 return items.filter(item => item.rise);

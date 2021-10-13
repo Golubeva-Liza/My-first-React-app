@@ -25,10 +25,6 @@ const AppFilter = (props) => {
             </button>
         )
     })
-    // onUpdateFilter = (e) => {
-    //     const filterName = e.target.getAttribute('data-filter');
-    //     this.props.onUpdateFilter(filterName);//передаем наверх локальное состояние
-    // }
 
     return (
         <div className="btn-group">
@@ -37,44 +33,4 @@ const AppFilter = (props) => {
     )
     }
 
-
-//я реализовала так, но у нас одинаковые кнопки почти и их лучше оформить пооптимизированнее
-// class AppFilter extends Component{
-//     constructor(props){
-//         super(props);
-//     }
-
-//     onUpdateFilter = (e) => {
-//         const filterName = e.target.getAttribute('data-filter');
-//         this.props.onUpdateFilter(filterName);//передаем наверх локальное состояние
-//     }
-
-//     render(){
-//         return (
-//             <div className="btn-group">
-//                 <button 
-//                     onClick={this.onUpdateFilter}
-//                     className="btn btn-light"
-//                     type="button"
-//                     data-filter="all">
-//                         Все сотрудники
-//                 </button>
-//                 <button 
-//                     onClick={this.onUpdateFilter}
-//                     className="btn btn-outline-light"
-//                     type="button"
-//                     data-filter="rise">
-//                         На повышение
-//                 </button>
-//                 <button 
-//                     onClick={this.onUpdateFilter}
-//                     className="btn btn-outline-light"
-//                     type="button"
-//                     data-filter="hight-salary">
-//                         З/п больше 1000$
-//                 </button>
-//             </div>
-//         )
-//     }
-// }
 export default AppFilter;

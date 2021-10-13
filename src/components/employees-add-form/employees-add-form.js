@@ -63,8 +63,6 @@ class EmployeesAddForm extends Component{
                         value={salary}
                     />
                     <button type="button" className="btn btn-outline-light" onClick={this.onSubmit}>Добавить</button>
-                    {/* <button type="button" className="btn btn-outline-light" onClick={(e) => addEmployee(e, this.state.name, this.state.salary)}>Добавить</button> */}
-                    {/* в таком случае не будет очищаться форма ввода */}
                 </form>
             </div>
         )
